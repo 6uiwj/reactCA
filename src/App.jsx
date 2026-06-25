@@ -5,6 +5,8 @@ function App() {
   let [logo, setLogo] = useState('블로그임');
   let [blogTitle, setBlogTitle] = useState(['남자 코트 추천', '강남 우동 맛집', '파이썬 독학']);
   let [like, setLike] = useState(0);
+  let [modal, setModal] = useState(false); //create a dynamic UI Step2 
+
   const handleLike = () =>  {
     setLike(like+1);
   };
@@ -19,6 +21,7 @@ function App() {
     blogCopy.sort();
     setBlogTitle(blogCopy);
   }
+
   return (
     <div className ="App">
       <div className = "black-nav">
@@ -37,16 +40,20 @@ function App() {
         <p>2월 17일 발행</p>
       </div>
       <div className='list'>
-        <h4>{blogTitle[2]}</h4>
+        <h4 onClick = {() => { setModal(!modal) }}>{blogTitle[2]}</h4>
         <p>2월 17일 발행</p>
       </div>
 
-      <Modal></Modal>
+      {
+        //html 내에 스크립트코드 작성 불가 -> 조건문 대신 삼항연산자 사용
+         modal == true ? <Modal/> : ''
+      }
+
     </div>
   );
 }
 
-function Modal() {
+function Modal() { //create a dynamic UI Step1
   return(
       <div className = "modal">
         <h4>제목</h4>
@@ -69,5 +76,12 @@ function Modal() {
  * 1. When shortening repetitive HTML
  * 2. Large pages
  * 3. Frequently changing UIs
+ */
+
+/**
+ * Steps to create a dynamic UI (create Modal)
+ * 1. complete the design in advance using Html and Css
+ * 2. Store the current state of the UI as state
+ * 3. Write how the UI will look based on the state
  */
 export default App
